@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>PlantFoU-EMSCADA.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Codeplex.Dashboarding">
       <HintPath>plugins\Codeplex.Dashboarding.dll</HintPath>
@@ -103,6 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PlantFoU-EMSCADA.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\PlantFoU-EMSCADA.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
