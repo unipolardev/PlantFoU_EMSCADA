@@ -419,9 +419,35 @@
         <Grid Margin="232,66,0,20">
             <Rectangle Fill="#FFCCDCF9"/>
             <TabControl x:Name="tabControl" Background="#FFCCDCF9" BorderBrush="{x:Null}">
-                <TabItem Header="TabItem" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="#FFF5F2F2" Style="{DynamicResource TabItemStyle1}">
+                <TabItem x:Name="monitoring" Header="MONITORING" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="#FFF5F2F2" Style="{DynamicResource TabItemStyle1}">
                     <Grid Margin="-6.667,0,-2.833,-3" Background="#FFE5E5E5">
-                        <Grid Height="142.5" Margin="87,29.79,75,0" VerticalAlignment="Top">
+                        <Grid x:Name="Menu_Grid" Height="35.373" Margin="10,3,10,0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32*"/>
+                                <ColumnDefinition Width="149*"/>
+                                <ColumnDefinition Width="71*"/>
+                                <ColumnDefinition Width="149*"/>
+                                <ColumnDefinition Width="72*"/>
+                                <ColumnDefinition Width="151*"/>
+                                <ColumnDefinition Width="76*"/>
+                                <ColumnDefinition Width="153*"/>
+                                <ColumnDefinition Width="72*"/>
+                                <ColumnDefinition Width="153*"/>
+                                <ColumnDefinition Width="31*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="8*"/>
+                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="7*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Fill="#FFF4F4F5" Stroke="Black" RadiusY="9.167" RadiusX="9.167" Grid.RowSpan="3" Grid.ColumnSpan="11"/>
+                            <Button x:Name="voltage_1" Content="VOLTAGE-1" Margin="-1,-1,-0.819,-1" FontWeight="Bold" Background="#FF4D5087" BorderBrush="{x:Null}" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+                            <Button x:Name="voltage_2" Content="VOLTAGE-2" Margin="-0.766,-1,-1.181,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF4D5087" FontWeight="Bold" Grid.Row="1" Grid.Column="3"/>
+                            <Button x:Name="current" Content="CURRENT" Margin="0.195,-1,0.078,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" FontWeight="Bold" Grid.Row="1" Grid.Column="5"/>
+                            <Button x:Name="power" Content="POWER" Margin="1.174,-1,0.737,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="7"/>
+                            <Button x:Name="quality" Content="QUALITY" Margin="1.218,-1,1,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="9"/>
+                        </Grid>
+                        <Grid x:Name="Current_Dialer_Grid" Height="142.5" Margin="87,46.29,75,0" VerticalAlignment="Top" d:IsLocked="True">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0*"/>
                                 <RowDefinition Height="107*"/>
@@ -448,15 +474,55 @@
                             <TextBlock x:Name="textBlock2_Copy1" Grid.Column="5" Grid.Row="2" TextWrapping="Wrap" Text="LINE 3" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="68,5,0,0" Margin="0,0,1.177,0"/>
                             <TextBlock x:Name="textBlock2_Copy2" Grid.Column="7" Grid.Row="2" TextWrapping="Wrap" Text="LINE N-N" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="55,5,0,0" Margin="0,0,1.177,0"/>
                         </Grid>
+                        <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="0*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36*"/>
+                                <ColumnDefinition Width="261*"/>
+                                <ColumnDefinition Width="121*"/>
+                                <ColumnDefinition Width="267*"/>
+                                <ColumnDefinition Width="118*"/>
+                                <ColumnDefinition Width="285*"/>
+                                <ColumnDefinition Width="22*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Margin="0.333,0,1.351,0" Grid.Column="1" Grid.RowSpan="3">
+                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black"/>
+                                <TextBlock x:Name="textBlock1" Margin="6,12.503,88,11.164" TextWrapping="Wrap" Foreground="White" Text="Apparent Energy (kVAh):" FontWeight="Bold" IsHitTestVisible="False" FontSize="11"/>
+                                <Grid HorizontalAlignment="Right" Margin="0,5.334,14.93,5.666" Width="86.667">
+                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Label x:Name="kVAh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Margin="3.515,0,-7.843,0" Grid.Column="3" Grid.RowSpan="3">
+                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black" Margin="0,0,10,0"/>
+                                <TextBlock x:Name="textBlock5" Margin="15.995,12.171,103.505,11.496" TextWrapping="Wrap" Foreground="White" Text="Real Energy (kWh):" FontWeight="Bold" IsHitTestVisible="False"/>
+                                <Grid HorizontalAlignment="Right" Margin="0,5.334,26.94,5.666" Width="86.667">
+                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Label x:Name="kWh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Margin="22.357,0,3.667,0" Grid.Column="5" Grid.RowSpan="3">
+                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black" Margin="-19.333,0,0,0"/>
+                                <TextBlock x:Name="textBlock6" Margin="-7.5,12.088,87.081,11.579" TextWrapping="Wrap" Foreground="White" Text="Reactive Energy (kVARh):" FontWeight="Bold" IsHitTestVisible="False" Padding="0"/>
+                                <Grid HorizontalAlignment="Right" Margin="0,5.334,14.58,5.666" Width="86.667">
+                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Label x:Name="kVARh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="TabItem" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="White" Cursor="Hand" Style="{DynamicResource TabItemStyle2}">
+                <TabItem x:Name="history" Header="HISTORY" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="White" Cursor="Hand" Style="{DynamicResource TabItemStyle2}">
                     <Grid Background="#FFE5E5E5" Margin="-3,0,-2.874,-2.667"/>
                 </TabItem>
             </TabControl>
 
         </Grid>
-        <Rectangle Fill="#FF4C5C7A" Height="20" VerticalAlignment="Bottom" d:IsLocked="True"/>
+        <Rectangle Fill="#FF4C5C7A" Height="20" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="textBlock3_Copy" Height="20" Margin="475,0,417,0" TextWrapping="Wrap" Text="All Rights Reserved By Unipolar Automation Technologies  " VerticalAlignment="Bottom" Foreground="White" IsHitTestVisible="False"/>
         <Grid HorizontalAlignment="Right" Height="20" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="193">
             <TextBlock x:Name="textBlock3" Margin="0,0,76.45,0" TextWrapping="Wrap" Text="PlantFoU-EMSCADA v 1.0" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
