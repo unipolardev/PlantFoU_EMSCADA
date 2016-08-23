@@ -447,34 +447,7 @@
                             <Button x:Name="power" Content="POWER" Margin="1.174,-1,0.737,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="7"/>
                             <Button x:Name="quality" Content="QUALITY" Margin="1.218,-1,1,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="9"/>
                         </Grid>
-                        <Grid x:Name="Current_Dialer_Grid" Height="142.5" Margin="87,46.29,75,0" VerticalAlignment="Top" d:IsLocked="True">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0*"/>
-                                <RowDefinition Height="107*"/>
-                                <RowDefinition Height="36*"/>
-                                <RowDefinition Height="0*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="165*"/>
-                                <ColumnDefinition Width="43*"/>
-                                <ColumnDefinition Width="166*"/>
-                                <ColumnDefinition Width="44*"/>
-                                <ColumnDefinition Width="166*"/>
-                                <ColumnDefinition Width="43*"/>
-                                <ColumnDefinition Width="166*"/>
-                                <ColumnDefinition Width="10*"/>
-                            </Grid.ColumnDefinitions>
-                            <Dashboarding:Dial180North x:Name="L_1" Height="Auto" Width="Auto" Margin="-3,0,1.002,0.417" Grid.Column="1" Grid.RowSpan="2"/>
-                            <Dashboarding:Dial180North x:Name="L_2" Height="Auto" Width="167" HorizontalAlignment="Left" Margin="13,0,0,0.417" Grid.Column="3" Grid.RowSpan="2"/>
-                            <Dashboarding:Dial180North x:Name="L_3" Height="Auto" Margin="-1.661,0,0.002,0.417" Width="Auto" Grid.Column="5" Grid.RowSpan="2"/>
-                            <Dashboarding:Dial180North x:Name="L_N" Height="Auto" Margin="-1.791,0,1.002,0.417" Width="Auto" Grid.Column="7" Grid.RowSpan="2"/>
-                            <TextBlock x:Name="textBlock2" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="LINE 1" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="68,5,0,0"/>
-                            <TextBlock x:Name="textBlock2_Copy" Grid.Column="3" Grid.Row="2" TextWrapping="Wrap" Text="LINE 2" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="68,5,0,0" Margin="0,0,1.177,0"/>
-                            <TextBlock x:Name="textBlock2_Copy1" Grid.Column="5" Grid.Row="2" TextWrapping="Wrap" Text="LINE 3" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="68,5,0,0" Margin="0,0,1.177,0"/>
-                            <TextBlock x:Name="textBlock2_Copy2" Grid.Column="7" Grid.Row="2" TextWrapping="Wrap" Text="LINE N-N" Foreground="#FF0B00F9" FontWeight="Bold" FontSize="18" Padding="55,5,0,0" Margin="0,0,1.177,0"/>
-                        </Grid>
-                        <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom">
+                        <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom" d:IsLocked="True">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0*"/>
                                 <RowDefinition/>
@@ -522,16 +495,19 @@
             </TabControl>
 
         </Grid>
-        <Rectangle Fill="#FF4C5C7A" Height="20" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="textBlock3_Copy" Height="20" Margin="475,0,417,0" TextWrapping="Wrap" Text="All Rights Reserved By Unipolar Automation Technologies  " VerticalAlignment="Bottom" Foreground="White" IsHitTestVisible="False"/>
-        <Grid HorizontalAlignment="Right" Height="20" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="193">
-            <TextBlock x:Name="textBlock3" Margin="0,0,76.45,0" TextWrapping="Wrap" Text="PlantFoU-EMSCADA v 1.0" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
-            <TextBlock x:Name="registered" HorizontalAlignment="Right" Margin="0,0,0,0.84" TextWrapping="Wrap" Text="PRO" Width="77.55" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
+        <Grid x:Name="Footer" Height="20" VerticalAlignment="Bottom">
+            <Rectangle Fill="#FF4C5C7A"/>
+            <TextBlock x:Name="textBlock3_Copy" Margin="475,0,417,0" TextWrapping="Wrap" Text="All Rights Reserved By Unipolar Automation Technologies  " Foreground="White" IsHitTestVisible="False"/>
+            <Grid HorizontalAlignment="Right" Margin="0,0,10,0" Width="193">
+                <TextBlock x:Name="textBlock3" Margin="0,0,76.45,0" TextWrapping="Wrap" Text="PlantFoU-EMSCADA v 1.0" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
+                <TextBlock x:Name="registered" HorizontalAlignment="Right" Margin="0,0,0,0.84" TextWrapping="Wrap" Text="PRO" Width="77.55" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
 
-        </Grid>
-        <Grid x:Name="User" HorizontalAlignment="Left" Height="20" Margin="13.5,0,0,0" VerticalAlignment="Bottom" Width="193">
-            <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="USER:" Foreground="White" Padding="0,2,0,0" IsHitTestVisible="False" HorizontalAlignment="Left" Width="36.55" FontWeight="Bold"/>
-            <TextBlock x:Name="user" Margin="41.55,0,0,0.84" TextWrapping="Wrap" Text="Admin@Unipolar" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
+            </Grid>
+            <Grid x:Name="User" HorizontalAlignment="Left" Margin="13.5,0,0,0" Width="193">
+                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="USER:" Foreground="White" Padding="0,2,0,0" IsHitTestVisible="False" HorizontalAlignment="Left" Width="36.55" FontWeight="Bold"/>
+                <TextBlock x:Name="user" Margin="41.55,0,0,0.84" TextWrapping="Wrap" Text="Admin@Unipolar" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
+
+            </Grid>
 
         </Grid>
 

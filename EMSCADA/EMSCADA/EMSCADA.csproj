@@ -43,6 +43,12 @@
     <Reference Include="Demos.Common">
       <HintPath>plugins\Demos.Common.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts">
+      <HintPath>..\..\..\..\..\Libraries\Graph\Live Charts\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf">
+      <HintPath>..\..\..\..\..\Libraries\Graph\Live Charts\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
