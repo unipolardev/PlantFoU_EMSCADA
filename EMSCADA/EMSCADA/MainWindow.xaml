@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMSCADA"
-        xmlns:Dashboarding="clr-namespace:Codeplex.Dashboarding;assembly=Codeplex.Dashboarding" x:Class="EMSCADA.MainWindow"
+        xmlns:Meter="clr-namespace:WPF.Meter;assembly=WPF.Meter" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EMSCADA.MainWindow"
+        
         mc:Ignorable="d"
         Title="PlantFoU-EMSCADA" Height="767" Width="1366" MinWidth="1280" MinHeight="716" WindowStartupLocation="CenterScreen" Icon="PlantFoU-EMSCADA.ico" WindowState="Maximized">
     <Window.Resources>
@@ -399,10 +400,22 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="Body_Content_DataGrid_Centering"
+        	TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid x:Name="Header_Panale" Height="66" VerticalAlignment="Top">
-            <Rectangle Fill="#FF50A1E4"/>
+            <Rectangle Fill="#FF3477C5"/>
             <TextBlock x:Name="textBlock" Margin="337.905,0,370.905,12.116" TextWrapping="Wrap" Text="PlantFoU-Energy Management SCADA" FontSize="36" FontWeight="Bold" Padding="0,6,0,0" Foreground="White" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
             <Menu x:Name="menu"  HorizontalAlignment="Right" Margin="0,17.5,20.25,5" Width="80.75" Background="{x:Null}" Cursor="Hand">
                 <MenuItem Header="MENU" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Width="78.75" Height="34" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="5,0,0,0" RenderTransformOrigin="0.483,0.488" FontSize="18">
@@ -413,8 +426,46 @@
 
             </Menu>
         </Grid>
-        <Grid x:Name="Left_Panel" HorizontalAlignment="Left" Margin="0,66,0,20" Width="232">
-            <Rectangle Fill="#FFCDD5E4"/>
+        <Grid x:Name="Left_Panel" HorizontalAlignment="Left" Margin="0,66,0,20" Width="232" Background="#FFCDD5E4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="225*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="108*"/>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="188*"/>
+                <RowDefinition Height="192*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="6.667,5,10,-5" Grid.Row="1" Grid.Column="1">
+                <Rectangle Fill="White" RadiusY="2.821" RadiusX="2.821" Margin="0,0,0,10"/>
+                <Grid Margin="5.342,5.5,5.341,4.5">
+                    <TextBlock x:Name="textBlock2" Height="39" TextWrapping="Wrap" Text="Connections Status" VerticalAlignment="Top" FontSize="22" Foreground="#FF0979D6" FontWeight="Bold" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+                    <Grid Margin="31.658,40.875,29.343,15.875" d:LayoutOverrides="Width">
+                        <Rectangle x:Name="statusBack" Fill="#FF0CD30C" RadiusY="2.821" RadiusX="2.821"/>
+                        <TextBlock x:Name="connectionStatus" Margin="36.386,0,34.703,0" TextWrapping="Wrap" Text="GOOD" FontSize="22" Foreground="White" FontWeight="Bold" IsHitTestVisible="False" VerticalAlignment="Center" d:LayoutOverrides="Width" Height="36.25" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <TreeView x:Name="energyIn" Margin="6.667,-0.169,6,-0.164" Grid.Row="3" Background="#FFE5ECF7" BorderBrush="{x:Null}" Grid.Column="1">
+                <TreeViewItem x:Name="energyin" Header="Energy In" IsExpanded="True"/>
+
+            </TreeView>
+            <TreeView x:Name="energyIn_Copy" Margin="5.667,5.216,7,-0.883" Grid.Row="4" Background="#FFE5ECF7" BorderBrush="{x:Null}" Grid.Column="1">
+                <TreeViewItem x:Name="conjumtion" Header="Conjumtion" IsExpanded="True"/>
+
+            </TreeView>
+            <TextBlock x:Name="textBlock7" Margin="6.667,9.333,7,5.169" Grid.Row="2" TextWrapping="Wrap" Background="#FF0988AE" Text="Device Treeview" Foreground="White" FontSize="22" FontWeight="Bold" IsHitTestVisible="False" Padding="24,0,0,0" Grid.Column="1"/>
+            <UniformGrid Margin="6.667,0.125,7,-0.125" Grid.Row="6" Grid.Column="1">
+                <UniformGrid.Background>
+                    <ImageBrush ImageSource="images/uatech_logo 1.jpg" Stretch="Uniform"/>
+                </UniformGrid.Background>
+            </UniformGrid>
         </Grid>
         <Grid Margin="232,66,0,20">
             <Rectangle Fill="#FFCCDCF9"/>
@@ -447,7 +498,7 @@
                             <Button x:Name="power" Content="POWER" Margin="1.174,-1,0.737,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="7"/>
                             <Button x:Name="quality" Content="QUALITY" Margin="1.218,-1,1,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="9"/>
                         </Grid>
-                        <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom" d:IsLocked="True">
+                        <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0*"/>
                                 <RowDefinition/>
@@ -463,26 +514,26 @@
                                 <ColumnDefinition Width="22*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Margin="0.333,0,1.351,0" Grid.Column="1" Grid.RowSpan="3">
-                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black"/>
+                                <Rectangle Fill="#FF2E8F99" Stroke="Black"/>
                                 <TextBlock x:Name="textBlock1" Margin="6,12.503,88,11.164" TextWrapping="Wrap" Foreground="White" Text="Apparent Energy (kVAh):" FontWeight="Bold" IsHitTestVisible="False" FontSize="11"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,14.93,5.666" Width="86.667">
-                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Rectangle Fill="White" RadiusY="2.749" RadiusX="2.749"/>
                                     <Label x:Name="kVAh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
                                 </Grid>
                             </Grid>
                             <Grid Margin="3.515,0,-7.843,0" Grid.Column="3" Grid.RowSpan="3">
-                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black" Margin="0,0,10,0"/>
+                                <Rectangle Fill="#FF2E8F99" Stroke="Black" Margin="0,0,10,0"/>
                                 <TextBlock x:Name="textBlock5" Margin="15.995,12.171,103.505,11.496" TextWrapping="Wrap" Foreground="White" Text="Real Energy (kWh):" FontWeight="Bold" IsHitTestVisible="False"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,26.94,5.666" Width="86.667">
-                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Rectangle Fill="White" RadiusY="2.406" RadiusX="2.406"/>
                                     <Label x:Name="kWh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
                                 </Grid>
                             </Grid>
                             <Grid Margin="22.357,0,3.667,0" Grid.Column="5" Grid.RowSpan="3">
-                                <Rectangle Fill="#FF2E8F99" RadiusY="9.167" RadiusX="9.167" Stroke="Black" Margin="-19.333,0,0,0"/>
+                                <Rectangle Fill="#FF2E8F99" Stroke="Black" Margin="-19.333,0,0,0"/>
                                 <TextBlock x:Name="textBlock6" Margin="-7.5,12.088,87.081,11.579" TextWrapping="Wrap" Foreground="White" Text="Reactive Energy (kVARh):" FontWeight="Bold" IsHitTestVisible="False" Padding="0"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,14.58,5.666" Width="86.667">
-                                    <Rectangle Fill="White" RadiusY="9.167" RadiusX="9.167"/>
+                                    <Rectangle Fill="White" RadiusY="2.821" RadiusX="2.821"/>
                                     <Label x:Name="kVARh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
                                 </Grid>
                             </Grid>
@@ -490,13 +541,239 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="history" Header="HISTORY" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="White" Cursor="Hand" Style="{DynamicResource TabItemStyle2}">
-                    <Grid Background="#FFE5E5E5" Margin="-3,0,-2.874,-2.667"/>
+                    <Grid Background="#FFE5E5E5" Margin="-3,0,-2.874,-3.011">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="280*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="134*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="134*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="280*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="245*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="251*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="368*"/>
+                            <RowDefinition Height="0*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="0.5,0.96,0.084,2.129" Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="51*"/>
+                                <ColumnDefinition Width="166*"/>
+                                <ColumnDefinition Width="62*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="59*"/>
+                                <RowDefinition Height="60*"/>
+                                <RowDefinition Height="89*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="4" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="3" BorderBrush="#FF95999D" Background="#FFB1D1C4"/>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="21.333" Margin="8,9.167,0,0" VerticalAlignment="Top" Width="24" Source="images/common_controls.png"/>
+                            <TextBlock Margin="36.667,3.206,0.445,2.205" TextWrapping="Wrap" Text="Common Controls" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="3"/>
+
+                            <GroupBox Header="  Section  " Margin="5,0.021,7.333,4.966" Foreground="Black" Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="#FF18CADC">
+                                <ComboBox x:Name="Section_Combobox" Height="Auto" Margin="2,4,2,2" />
+                            </GroupBox>
+
+                            <GroupBox Header="  Value  " Margin="5,0,5,4.727" Foreground="Black" Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="#FF18CADC">
+                                <ComboBox x:Name="Values_Combobox" Height="25" Margin="2,4,2,2" />
+                            </GroupBox>
+
+                            <GroupBox Header="  Timeline  " Grid.Row="3" Margin="5,2.5,5,4.095" Foreground="Black" Grid.ColumnSpan="3" BorderBrush="#FF18CADC">
+                                <Grid Margin="0,-5.333,-3.667,-4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="38*"/>
+                                        <ColumnDefinition Width="160"/>
+                                        <ColumnDefinition Width="63*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:DateTimePicker x:Name="DateTimeFrom" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" Value="2015-01-01 12:00:00" Margin="2.5,8.002,2.537,4.416" Grid.Column="1" HorizontalContentAlignment="Stretch"/>
+                                    <TextBlock HorizontalAlignment="Left" Height="18" Margin="4.334,10.44,0,5.939" TextWrapping="Wrap" Text="From" VerticalAlignment="Center" Width="34.167" Foreground="#FF080000" Grid.ColumnSpan="2"/>
+                                    <xctk:DateTimePicker x:Name="DateTimeTo" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" Value="2015-01-01 12:00:00" Margin="2.5,4.561,2.537,7.856" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+                                    <TextBlock HorizontalAlignment="Left" Height="18.5" Margin="4.334,5.979,0,9.899" TextWrapping="Wrap" Text="To     " VerticalAlignment="Center" Width="34.833" Foreground="#FF080000" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                    <Button x:Name="PlotButton" Content="Plot" Margin="3,8.5,3.999,7.741" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" />
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                        <Grid Margin="-0.032,0.96,0.149,2.129" Grid.Row="1" Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="5" BorderBrush="#FF95999D" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="3" Margin="0" Background="#FFB1D1C4"/>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="21.333" Margin="8,9.167,0,0" VerticalAlignment="Top" Width="24" Source="images/power_widget_icon.png"/>
+                            <TextBlock Margin="36.667,3.206,0.445,2.205" TextWrapping="Wrap" Text="Power" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="3"/>
+                            <Button x:Name="Power_LastHour" Content="Last Hour" Margin="5,4.5,5,2.5" Grid.Row="1" />
+                            <Button x:Name="Power_Today" Content="Today" Margin="5,2.5" Grid.Row="2" />
+                            <Button x:Name="Power_ThisWeek" Content="This Week" Margin="5,2.5" Grid.Row="3" />
+                            <Button x:Name="Power_Month" Content="This Month" Margin="5,2.5,5,6.5" Grid.Row="4"/>
+                        </Grid>
+                        <Grid Margin="0.304,0.96,-0.046,2.129" Grid.Row="1" Grid.Column="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="5" BorderBrush="#FF95999D" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="3" Margin="0" Background="#FFB1D1C4"/>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="21.333" Margin="8,9.167,0,0" VerticalAlignment="Top" Width="24" Source="images/energy_widget_icon.png"/>
+                            <TextBlock Margin="36.667,3.206,0.445,2.205" TextWrapping="Wrap" Text="Energy" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="3"/>
+                            <Button x:Name="Energy_LastHour" Content="Last Hour" Margin="5,4.5,5,2.5" Grid.Row="1" />
+                            <Button x:Name="Energy_Today" Content="Today" Margin="5,2.5" Grid.Row="2" />
+                            <Button x:Name="Energy_ThisWeek" Content="This Week" Margin="5,2.5" Grid.Row="3" />
+                            <Button x:Name="Energy_ThisMonth" Content="This Month" Margin="5,2.5,5,6.5" Grid.Row="4" />
+                        </Grid>
+                        <Grid Margin="0.441,0.96,0.709,2.129" Grid.Row="1" Grid.Column="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="59*"/>
+                                <RowDefinition Height="60*"/>
+                                <RowDefinition Height="89*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="5" BorderBrush="#FF95999D" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="2" Margin="0,0,-0.334,0" Background="#FFB1D1C4"/>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Margin="0,0,-0.334,0" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="21" Margin="8,9,0,0" VerticalAlignment="Top" Width="24" Source="images/common_controls.png"/>
+                            <TextBlock Margin="37,3,3.666,2" TextWrapping="Wrap" Text="Compare" VerticalAlignment="Center" FontSize="20" Height="35" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                            <GroupBox Header="  Section 1  " Margin="5,0,2,5" Foreground="Black" Grid.Row="1" Grid.Column="0" BorderBrush="#FFACE0FF">
+                                <ComboBox x:Name="Section1_Compare_Combobox" Height="Auto" Margin="2,4,2,2" />
+                            </GroupBox>
+
+                            <GroupBox Header="  Section 2  " Margin="5,0,2,5" Foreground="Black" Grid.Row="1" Grid.Column="1" BorderBrush="#FFACE0FF">
+                                <ComboBox x:Name="Section2_Compare_Combobox" Height="Auto" Margin="2,4,2,2" />
+                            </GroupBox>
+
+                            <GroupBox Header="  Value  " Margin="5,0,5,4.727" Foreground="Black" Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="#FFACE0FF">
+                                <ComboBox x:Name="Values_Compare_Combobox" Height="25" Margin="2,4,2,2" />
+                            </GroupBox>
+
+                            <GroupBox Header="  Timeline  " Grid.Row="3" Margin="5,2.5,5,4.095" Foreground="Black" Grid.ColumnSpan="3" BorderBrush="#FFACE0FF">
+                                <Grid Margin="0,-5.333,-3.667,-4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="38*"/>
+                                        <ColumnDefinition Width="160*"/>
+                                        <ColumnDefinition Width="63*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:DateTimePicker x:Name="DateTimeFrom_Compare" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" Value="2015-01-01 12:00:00" Margin="2.5,8.002,2.537,4.416" Grid.Column="1" HorizontalContentAlignment="Stretch"/>
+                                    <TextBlock HorizontalAlignment="Left" Height="18" Margin="4.334,10.44,0,5.939" TextWrapping="Wrap" Text="From " VerticalAlignment="Center" Width="34.167" Foreground="#FF080000" Grid.ColumnSpan="2"/>
+                                    <xctk:DateTimePicker x:Name="DateTimeTo_Compare" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" Value="2015-01-01 12:00:00" Margin="2.5,4.561,2.537,7.856" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+                                    <TextBlock HorizontalAlignment="Left" Height="18.5" Margin="4.334,5.979,0,9.899" TextWrapping="Wrap" Text="To     " VerticalAlignment="Center" Width="34.833" Foreground="#FF080000" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                    <Button x:Name="PlotButton_Compare" Content="Plot" Margin="3,8.5,3.999,7.741" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" />
+                                </Grid>
+                            </GroupBox>
+
+                        </Grid>
+                        <Grid Margin="-0.138,0.96,0.999,2.129" Grid.Row="1" Grid.Column="9">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="5" BorderBrush="#FF95999D" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="3" Margin="0" Background="#FFB1D1C4"/>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="21.333" Margin="8,9.167,0,0" VerticalAlignment="Top" Width="24" Source="images/common_controls.png"/>
+                            <TextBlock Margin="36.667,3.206,0.445,2.205" TextWrapping="Wrap" Text="Data" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="3"/>
+
+                            <DataGrid x:Name="History_Datagrid" Grid.Row="1" Grid.RowSpan="4" CellStyle="{StaticResource Body_Content_DataGrid_Centering}" />
+                        </Grid>
+                        <Grid Margin="3.375,1.337,3.125,-0.333" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="9">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="4" Grid.ColumnSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3"/>
+                            <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.08"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Image HorizontalAlignment="Left" Height="22" Margin="8,8.5,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                            <TextBlock Margin="36.667,2.706,0.445,1.705" TextWrapping="Wrap" Text="History Graph" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold"/>
+
+                        </Grid>
+                    </Grid>
                 </TabItem>
             </TabControl>
 
         </Grid>
         <Grid x:Name="Footer" Height="20" VerticalAlignment="Bottom">
-            <Rectangle Fill="#FF4C5C7A"/>
+            <Rectangle Fill="#FF354A5F"/>
             <TextBlock x:Name="textBlock3_Copy" Margin="475,0,417,0" TextWrapping="Wrap" Text="All Rights Reserved By Unipolar Automation Technologies  " Foreground="White" IsHitTestVisible="False"/>
             <Grid HorizontalAlignment="Right" Margin="0,0,10,0" Width="193">
                 <TextBlock x:Name="textBlock3" Margin="0,0,76.45,0" TextWrapping="Wrap" Text="PlantFoU-EMSCADA v 1.0" Foreground="White" FontSize="10" Padding="0,3,0,0" IsHitTestVisible="False"/>
