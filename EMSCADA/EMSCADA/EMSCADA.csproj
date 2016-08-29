@@ -41,6 +41,9 @@
       <HintPath>plugins\Interop.OPCAutomation.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="meterWidget">
+      <HintPath>plugins\meterWidget.dll</HintPath>
+    </Reference>
     <Reference Include="ReuxablesLegacy">
       <HintPath>plugins\ReuxablesLegacy.dll</HintPath>
     </Reference>
@@ -124,12 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="fonts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WPF.Meter\WPF.Meter.csproj">
-      <Project>{36c532b2-37b5-4390-9b0e-cf1c9083c00b}</Project>
-      <Name>WPF.Meter</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\alarms.png" />

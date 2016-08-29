@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMSCADA"
-        xmlns:Meter="clr-namespace:WPF.Meter;assembly=WPF.Meter" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EMSCADA.MainWindow"
+        xmlns:Meter="clr-namespace:WPF.Meter;assembly=WPF.Meter" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:meterWidget="clr-namespace:meterWidget;assembly=meterWidget" x:Class="EMSCADA.MainWindow"
         
         mc:Ignorable="d"
         Title="PlantFoU-EMSCADA" Height="767" Width="1366" MinWidth="1280" MinHeight="716" WindowStartupLocation="CenterScreen" Icon="PlantFoU-EMSCADA.ico" WindowState="Maximized">
