@@ -4,7 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMSCADA"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:meterWidget="clr-namespace:meterWidget;assembly=meterWidget" x:Class="EMSCADA.MainWindow"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:meterWidget="clr-namespace:meterWidget;assembly=meterWidget" 
+        
+        
+        
+        xmlns:realtimeGraphwidget="clr-namespace:realtimeGraphwidget;assembly=realtimeGraphwidget" 
+        
+        
+        
+        x:Class="EMSCADA.MainWindow"
         
         mc:Ignorable="d"
         Title="PlantFoU-EMSCADA" Height="767" Width="1366" MinWidth="1280" MinHeight="716" WindowStartupLocation="CenterScreen" Icon="PlantFoU-EMSCADA.ico" WindowState="Maximized">
@@ -452,7 +460,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <TreeView x:Name="energyIn" Margin="6.667,-0.169,6,-0.164" Grid.Row="3" Background="#FFE5ECF7" BorderBrush="{x:Null}" Grid.Column="1">
+            <TreeView x:Name="energyIn" Margin="4,0,9,0" Grid.Row="3" Background="#FFE5ECF7" BorderBrush="{x:Null}" Grid.Column="1">
                 <TreeViewItem x:Name="energyin" Header="Energy In" IsExpanded="True"/>
 
             </TreeView>
@@ -471,7 +479,7 @@
             <Rectangle Fill="#FFCCDCF9"/>
             <TabControl x:Name="tabControl" Background="#FFCCDCF9" BorderBrush="{x:Null}">
                 <TabItem x:Name="monitoring" Header="MONITORING" BorderBrush="{x:Null}" Background="#FF0979D6" Foreground="#FFF5F2F2" Style="{DynamicResource TabItemStyle1}">
-                    <Grid Margin="-6.667,0,-2.833,-3" Background="#FFE5E5E5">
+                    <Grid x:Name="M_grid" Margin="-6.667,0,-2.833,-3" Background="#FFE5E5E5">
                         <Grid x:Name="Menu_Grid" Height="35.373" Margin="10,3,10,0" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32*"/>
@@ -492,11 +500,11 @@
                                 <RowDefinition Height="7*"/>
                             </Grid.RowDefinitions>
                             <Rectangle Fill="#FFF4F4F5" Stroke="Black" RadiusY="9.167" RadiusX="9.167" Grid.RowSpan="3" Grid.ColumnSpan="11"/>
-                            <Button x:Name="voltage_1" Content="VOLTAGE-1" Margin="-1,-1,-0.819,-1" FontWeight="Bold" Background="#FF4D5087" BorderBrush="{x:Null}" Foreground="White" Grid.Row="1" Grid.Column="1"/>
-                            <Button x:Name="voltage_2" Content="VOLTAGE-2" Margin="-0.766,-1,-1.181,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF4D5087" FontWeight="Bold" Grid.Row="1" Grid.Column="3"/>
-                            <Button x:Name="current" Content="CURRENT" Margin="0.195,-1,0.078,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" FontWeight="Bold" Grid.Row="1" Grid.Column="5"/>
-                            <Button x:Name="power" Content="POWER" Margin="1.174,-1,0.737,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="7"/>
-                            <Button x:Name="quality" Content="QUALITY" Margin="1.218,-1,1,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="9"/>
+                            <Button x:Name="voltage_1" Content="VOLTAGE-1" Margin="-1,-1,-0.819,-1" FontWeight="Bold" Background="#FF4D5087" BorderBrush="{x:Null}" Foreground="White" Grid.Row="1" Grid.Column="1" Click="voltage_1_Click"/>
+                            <Button x:Name="voltage_2" Content="VOLTAGE-2" Margin="-0.766,-1,-1.181,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF4D5087" FontWeight="Bold" Grid.Row="1" Grid.Column="3" Click="voltage_2_Click"/>
+                            <Button x:Name="current" Content="CURRENT" Margin="0.195,-1,0.078,-1" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" FontWeight="Bold" Grid.Row="1" Grid.Column="5" Click="current_Click"/>
+                            <Button x:Name="power" Content="POWER" Margin="1.174,-1,0.737,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="7" Click="power_Click"/>
+                            <Button x:Name="quality" Content="QUALITY" Margin="1.218,-1,1,-1" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Background="#FF505994" Grid.Row="1" Grid.Column="9" Click="quality_Click"/>
                         </Grid>
                         <Grid x:Name="Bottom_Grid" Height="39.667" Margin="10,0,10,4" VerticalAlignment="Bottom">
                             <Grid.RowDefinitions>
@@ -505,15 +513,32 @@
                                 <RowDefinition Height="0*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="36*"/>
-                                <ColumnDefinition Width="261*"/>
-                                <ColumnDefinition Width="121*"/>
-                                <ColumnDefinition Width="267*"/>
-                                <ColumnDefinition Width="118*"/>
-                                <ColumnDefinition Width="285*"/>
-                                <ColumnDefinition Width="22*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="210*"/>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="262*"/>
+                                <ColumnDefinition Width="24*"/>
+                                <ColumnDefinition Width="265*"/>
+                                <ColumnDefinition Width="23*"/>
+                                <ColumnDefinition Width="281*"/>
+                                <ColumnDefinition Width="13*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Margin="0.333,0,1.351,0" Grid.Column="1" Grid.RowSpan="3">
+                            <Grid Margin="0.802,0,0.414,0" Grid.RowSpan="2" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="86*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Fill="#FF4D5087" Stroke="Black" Grid.ColumnSpan="5" Margin="0,0,0.001,0"/>
+                                <TextBlock x:Name="textBlock8" Margin="0.466,5.334,-13.13,6" TextWrapping="Wrap" Foreground="White" Text="SECTION" FontWeight="Bold" IsHitTestVisible="False" FontSize="20" Padding="5,0,0,0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <Grid Margin="-0.01,5.334,-0.057,5.666" Grid.Column="3" d:LayoutOverrides="HorizontalAlignment">
+                                    <Rectangle Fill="White" RadiusY="2.749" RadiusX="2.749"/>
+                                    <Label x:Name="sec_name" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="Voltage1" Padding="0" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Margin="0.936,0,1.642,0" Grid.RowSpan="2" Grid.Column="3">
                                 <Rectangle Fill="#FF2E8F99" Stroke="Black"/>
                                 <TextBlock x:Name="textBlock1" Margin="6,12.503,88,11.164" TextWrapping="Wrap" Foreground="White" Text="Apparent Energy (kVAh):" FontWeight="Bold" IsHitTestVisible="False" FontSize="11"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,14.93,5.666" Width="86.667">
@@ -521,7 +546,7 @@
                                     <Label x:Name="kVAh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
                                 </Grid>
                             </Grid>
-                            <Grid Margin="3.515,0,-7.843,0" Grid.Column="3" Grid.RowSpan="3">
+                            <Grid Margin="2.227,0,-8.456,0" Grid.RowSpan="2" Grid.Column="5">
                                 <Rectangle Fill="#FF2E8F99" Stroke="Black" Margin="0,0,10,0"/>
                                 <TextBlock x:Name="textBlock5" Margin="15.995,12.171,103.505,11.496" TextWrapping="Wrap" Foreground="White" Text="Real Energy (kWh):" FontWeight="Bold" IsHitTestVisible="False"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,26.94,5.666" Width="86.667">
@@ -529,7 +554,7 @@
                                     <Label x:Name="kWh" Margin="4.58,1.999,4.58,2.25" IsHitTestVisible="False" FontSize="16" Background="{x:Null}" Foreground="#FF2E8F99" FlowDirection="RightToLeft" Content="000" Padding="0"/>
                                 </Grid>
                             </Grid>
-                            <Grid Margin="22.357,0,3.667,0" Grid.Column="5" Grid.RowSpan="3">
+                            <Grid Margin="21.477,0,0.818,0" Grid.RowSpan="2" Grid.Column="7">
                                 <Rectangle Fill="#FF2E8F99" Stroke="Black" Margin="-19.333,0,0,0"/>
                                 <TextBlock x:Name="textBlock6" Margin="-7.5,12.088,87.081,11.579" TextWrapping="Wrap" Foreground="White" Text="Reactive Energy (kVARh):" FontWeight="Bold" IsHitTestVisible="False" Padding="0"/>
                                 <Grid HorizontalAlignment="Right" Margin="0,5.334,14.58,5.666" Width="86.667">
@@ -538,8 +563,8 @@
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="Voltage_1" Margin="12.667,43.373,3.5,56.307">
-                            <Grid x:Name="vol1Meter" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
+                        <Grid x:Name="button1" Margin="12.667,43.373,3.5,56.307">
+                            <Grid x:Name="Meter" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="7*"/>
                                     <RowDefinition Height="114*"/>
@@ -561,7 +586,7 @@
                                 <meterWidget:eMeter x:Name="vol1c" Margin="0.533,1.625,0.348,3.042" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
                                 <meterWidget:eMeter x:Name="vol1d" Margin="0.573,1.625,0.302,3.042" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
                             </Grid>
-                            <Grid x:Name="vol1Graph" Margin="0,132.733,0,0">
+                            <Grid x:Name="Graph" Margin="0,132.733,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0*"/>
                                     <RowDefinition Height="193*"/>
@@ -578,11 +603,11 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid x:Name="A" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="4" Grid.ColumnSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3"/>
-                                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE">
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -592,17 +617,20 @@
                                             </TransformGroup>
                                         </Border.RenderTransform>
                                     </Border>
-                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8.5,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
-                                    <TextBlock x:Name="Value_Graph_A" Margin="36.667,2.706,0.445,1.705" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold"/>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+                                    <Grid Margin="0,-2,0.292,5.625" Grid.Row="1">
+                                        <realtimeGraphwidget:LiveGraph x:Name="Chart_A" d:LayoutOverrides="Width, Height" Margin="0,0,-0.001,0"/>
+                                    </Grid>
 
                                 </Grid>
-                                <Grid x:Name="C" Margin="2.5,3.883,0.208,0.417" Grid.ColumnSpan="2" Grid.Row="3">
+                                <Grid x:Name="B" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="4" Grid.ColumnSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3"/>
-                                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE">
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -612,17 +640,17 @@
                                             </TransformGroup>
                                         </Border.RenderTransform>
                                     </Border>
-                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8.5,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
-                                    <TextBlock x:Name="Value_Graph_C" Margin="36.667,2.706,0.445,1.705" TextWrapping="Wrap" Text="Value Graph C" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold"/>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A1" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
 
                                 </Grid>
-                                <Grid x:Name="B" Margin="1.54,0,5.25,1.75" Grid.Column="3" Grid.RowSpan="2">
+                                <Grid x:Name="C" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="4" Grid.ColumnSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3"/>
-                                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE">
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -632,17 +660,17 @@
                                             </TransformGroup>
                                         </Border.RenderTransform>
                                     </Border>
-                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8.5,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
-                                    <TextBlock x:Name="Value_Graph_B" Margin="36.667,2.706,0.445,1.705" TextWrapping="Wrap" Text="Value Graph B" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold"/>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A2" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
 
                                 </Grid>
-                                <Grid x:Name="D" Margin="2.165,3.883,4.625,0.417" Grid.Column="3" Grid.Row="3">
+                                <Grid x:Name="D" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="4" Grid.ColumnSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3"/>
-                                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE">
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -652,8 +680,485 @@
                                             </TransformGroup>
                                         </Border.RenderTransform>
                                     </Border>
-                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8.5,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
-                                    <TextBlock x:Name="Value_Graph_D" Margin="36.667,2.706,0.445,1.705" TextWrapping="Wrap" Text="Value Graph D" VerticalAlignment="Center" FontSize="20" Height="34.589" Foreground="White" FontWeight="Bold"/>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A3" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="button2" Margin="12.667,43.373,3,56.307" d:IsHidden="True">
+                            <Grid x:Name="Meter1" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="114*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="88*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="33*"/>
+                                    <ColumnDefinition Width="207*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="208*"/>
+                                    <ColumnDefinition Width="88*"/>
+                                </Grid.ColumnDefinitions>
+                                <meterWidget:eMeter x:Name="vol2a" Margin="-0.046,1.625,1.767,3.042" Height="Auto" d:LayoutOverrides="TopMargin, BottomMargin" Grid.Row="1" Width="Auto" Grid.Column="1" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="vol2b" Margin="0.18,1.625,0.149,3.042" Height="Auto" Grid.Column="3" Width="Auto" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="vol2c" Margin="0.533,1.625,0.348,3.042" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="vol2d" Margin="0.573,1.625,0.302,3.042" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Grid x:Name="Graph1" Margin="0,132.733,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0*"/>
+                                    <RowDefinition Height="193*"/>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="195*"/>
+                                    <RowDefinition Height="0*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0*"/>
+                                    <ColumnDefinition Width="552*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="556*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="A1" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A4" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="B1" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A5" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="C1" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A6" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="D1" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A7" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="button3" Margin="12.667,43.373,3,56.307" d:IsHidden="True">
+                            <Grid x:Name="Meter2" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="114*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="88*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="33*"/>
+                                    <ColumnDefinition Width="207*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="208*"/>
+                                    <ColumnDefinition Width="88*"/>
+                                </Grid.ColumnDefinitions>
+                                <meterWidget:eMeter x:Name="currenta" Margin="-0.046,1.625,1.767,3.042" Height="Auto" d:LayoutOverrides="TopMargin, BottomMargin" Grid.Row="1" Width="Auto" Grid.Column="1" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="currentb" Margin="0.18,1.625,0.149,3.042" Height="Auto" Grid.Column="3" Width="Auto" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="currentc" Margin="0.533,1.625,0.348,3.042" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="currentd" Margin="0.573,1.625,0.302,3.042" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Grid x:Name="Graph2" Margin="0,132.733,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0*"/>
+                                    <RowDefinition Height="193*"/>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="195*"/>
+                                    <RowDefinition Height="0*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0*"/>
+                                    <ColumnDefinition Width="552*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="556*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="A2" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A8" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="B2" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A9" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="C2" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A10" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="D2" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A11" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="button4" Margin="12.667,43.373,3,56.307" d:IsHidden="True">
+                            <Grid x:Name="Meter3" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="114*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="173*"/>
+                                    <ColumnDefinition Width="204*"/>
+                                    <ColumnDefinition Width="83*"/>
+                                    <ColumnDefinition Width="204*"/>
+                                    <ColumnDefinition Width="75*"/>
+                                    <ColumnDefinition Width="206*"/>
+                                    <ColumnDefinition Width="165*"/>
+                                </Grid.ColumnDefinitions>
+                                <meterWidget:eMeter x:Name="powera" Margin="0.341,2.322,-0.263,1.943" d:LayoutOverrides="TopMargin, BottomMargin" Grid.Row="1" Grid.Column="1" Width="Auto"/>
+                                <meterWidget:eMeter x:Name="powerb" Margin="-0.073,2.322,-0.131,1.943" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" Width="Auto" Grid.Column="3"/>
+                                <meterWidget:eMeter x:Name="powerc" Margin="1.332,2.322,0.658,1.943" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" Width="Auto" Grid.Column="5"/>
+                            </Grid>
+                            <Grid x:Name="Graph3" Margin="0,132.733,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0*"/>
+                                    <RowDefinition Height="193*"/>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="195*"/>
+                                    <RowDefinition Height="0*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0*"/>
+                                    <ColumnDefinition Width="552*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="556*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="A3" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A12" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="B3" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A13" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="C3" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A14" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="D3" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2" IsEnabled="False" ToolTip="Disable" IsHitTestVisible="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF6F7172" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A15" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="button5" Margin="12.667,43.373,3,56.307" d:IsHidden="True">
+                            <Grid x:Name="Meter4" Height="126.294" VerticalAlignment="Top" Margin="0,0,4.333,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="114*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="88*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="33*"/>
+                                    <ColumnDefinition Width="207*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="209*"/>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="208*"/>
+                                    <ColumnDefinition Width="88*"/>
+                                </Grid.ColumnDefinitions>
+                                <meterWidget:eMeter x:Name="qualitya" Margin="-0.046,1.625,1.767,3.042" Height="Auto" d:LayoutOverrides="TopMargin, BottomMargin" Grid.Row="1" Width="Auto" Grid.Column="1" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="qualityb" Margin="0.18,1.625,0.149,3.042" Height="Auto" Grid.Column="3" Width="Auto" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="qualityc" Margin="0.533,1.625,0.348,3.042" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                                <meterWidget:eMeter x:Name="qualityd" Margin="0.573,1.625,0.302,3.042" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="1" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Grid x:Name="Graph4" Margin="0,132.733,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0*"/>
+                                    <RowDefinition Height="193*"/>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="195*"/>
+                                    <RowDefinition Height="0*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0*"/>
+                                    <ColumnDefinition Width="552*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="556*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="A4" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A16" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="B4" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A17" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="C4" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A18" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+
+                                </Grid>
+                                <Grid x:Name="D4" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform AngleY="-0.08"/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
+                                    <TextBlock x:Name="Value_Graph_A19" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
 
                                 </Grid>
                             </Grid>
