@@ -5,15 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMSCADA"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:meterWidget="clr-namespace:meterWidget;assembly=meterWidget" 
-        
-        
-        
-        xmlns:realtimeGraphwidget="clr-namespace:realtimeGraphwidget;assembly=realtimeGraphwidget" 
-        
-        
-        
+        xmlns:ConstantChanges="clr-namespace:Wpf.CartesianChart.ConstantChanges;assembly=CartesianChart"
         x:Class="EMSCADA.MainWindow"
-        
         mc:Ignorable="d"
         Title="PlantFoU-EMSCADA" Height="767" Width="1366" MinWidth="1280" MinHeight="716" WindowStartupLocation="CenterScreen" Icon="PlantFoU-EMSCADA.ico" WindowState="Maximized">
     <Window.Resources>
@@ -603,11 +596,12 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid x:Name="A" Margin="1.875,0,0.833,1.75" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="32"/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="34"/>
+                                        <RowDefinition Height="3*"/>
+                                        <RowDefinition Height="155*"/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
-                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
+                                    <Border Grid.RowSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -617,19 +611,27 @@
                                             </TransformGroup>
                                         </Border.RenderTransform>
                                     </Border>
-                                    <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
-                                    <TextBlock x:Name="Value_Graph_A" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
-                                    <Grid Margin="0,-2,0.292,5.625" Grid.Row="1">
-                                        <realtimeGraphwidget:LiveGraph x:Name="Chart_A" d:LayoutOverrides="Width, Height" Margin="0,0,-0.001,0"/>
-                                    </Grid>
+                                    <Image HorizontalAlignment="Left" Margin="8,8,0,2" Width="24" Source="images/Graph_History.png" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <TextBlock x:Name="Value_Graph_A" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <ConstantChanges:ConstantChangesChart x:Name="ChartA1" Margin="5.125,0.066,10,5.625" Grid.Row="2" d:LayoutOverrides="LeftMargin, RightMargin"/>
+
+
+
+
+
+
+
+
+
 
                                 </Grid>
                                 <Grid x:Name="B" Margin="0,0,6,2" Grid.RowSpan="2" Grid.Column="3">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="32"/>
                                         <RowDefinition/>
+                                        <RowDefinition Height="52*"/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.RowSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
                                     <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
@@ -642,14 +644,16 @@
                                     </Border>
                                     <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
                                     <TextBlock x:Name="Value_Graph_A1" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+                                    <ConstantChanges:ConstantChangesChart x:Name="ChartB1" Margin="5.125,2.124,6.332,5.375" Grid.Row="2"/>
 
                                 </Grid>
                                 <Grid x:Name="C" Margin="3.041,4.685,-1.042,-0.682" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="32"/>
                                         <RowDefinition/>
+                                        <RowDefinition Height="52*"/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.RowSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
                                     <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
@@ -662,14 +666,16 @@
                                     </Border>
                                     <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
                                     <TextBlock x:Name="Value_Graph_A2" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+                                    <ConstantChanges:ConstantChangesChart x:Name="ChartC1" Margin="5.125,1.863,3.376,5.375" Grid.Row="2"/>
 
                                 </Grid>
                                 <Grid x:Name="D" Margin="0.375,4.435,5.625,-0.432" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="32"/>
                                         <RowDefinition/>
+                                        <RowDefinition Height="39*"/>
                                     </Grid.RowDefinitions>
-                                    <Border Grid.RowSpan="2" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
+                                    <Border Grid.RowSpan="3" BorderBrush="#FF4C5C7A" BorderThickness="1" CornerRadius="3" Margin="0,0,0.292,0"/>
                                     <Border Grid.Row="0" BorderThickness="2" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="#FF0988AE" Margin="0,0,0.292,0">
                                         <Border.RenderTransform>
                                             <TransformGroup>
@@ -682,6 +688,7 @@
                                     </Border>
                                     <Image HorizontalAlignment="Left" Height="22" Margin="8,8,0,0" VerticalAlignment="Top" Width="24" Source="images/Graph_History.png"/>
                                     <TextBlock x:Name="Value_Graph_A3" Margin="37,4,0.292,2" TextWrapping="Wrap" Text="Value Graph A" VerticalAlignment="Center" Height="26" Foreground="White" FontWeight="Bold" FontSize="16" Padding="0,2,0,0"/>
+                                    <ConstantChanges:ConstantChangesChart x:Name="ChartD1" Margin="5.125,1.446,6.707,5.375" Grid.Row="2"/>
 
                                 </Grid>
                             </Grid>

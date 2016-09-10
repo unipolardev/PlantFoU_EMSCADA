@@ -23,6 +23,7 @@ namespace EMSCADA
         public MainWindow()
         {
             InitializeComponent();
+            button1GridEnable();
             startingMeter();
 
         }
@@ -31,8 +32,13 @@ namespace EMSCADA
         {
             sec_name.Content = "Voltage1";
             button1GridEnable();
-            Chart_A.StartChart();
-            
+            //Chart_A.StartChart();
+            ChartA1.StartChart();
+            ChartB1.StartChart();
+            ChartC1.StartChart();
+            ChartD1.StartChart();
+
+
         }
 
 
